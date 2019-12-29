@@ -15,7 +15,7 @@ import java.lang.reflect.Array;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     Spinner spinner;
-    String spinner_items[] = {"English", "Indonesia"};
+    String spinner_items[] = {"English", "Indonesia", "Chinese"};
     ArrayAdapter<String>arrayAdapter;
     TextView followers, likes, tags;
     @Override
@@ -40,12 +40,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             followers.setText("Followers");
             likes.setText("Likes");
             tags.setText("Tags");
-        }else{
+        }else if(item == "Indonesia"){
             followers.setText("Pengikut");
             likes.setText("Suka");
             tags.setText("Menandai");
+        }else if(item == "Chinese"){
+            followers.setText("追随者");
+            likes.setText("喜欢它");
+            tags.setText("马克");
         }
-
     }
 
     @Override
