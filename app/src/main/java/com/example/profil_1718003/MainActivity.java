@@ -2,57 +2,70 @@ package com.example.profil_1718003;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.Button;
 
-import java.lang.reflect.Array;
+import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
-    Spinner spinner;
-    String spinner_items[] = {"English", "Indonesia", "Chinese"};
-    ArrayAdapter<String>arrayAdapter;
-    TextView followers, likes, tags;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        spinner = findViewById(R.id.spiner);
-        arrayAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, spinner_items);
-        spinner.setAdapter(arrayAdapter);
-
-        spinner.setOnItemSelectedListener(this);
+        Button changelang = findViewById(R.id.changeLang);
+        changelang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showChangeLanguageDialog();
+            }
+        });
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String item = parent.getItemAtPosition(position).toString();
-        followers = findViewById(R.id.followers);
-        likes = findViewById(R.id.likes);
-        tags = findViewById(R.id.tags);
-        if (item == "English"){
-            followers.setText("Followers");
-            likes.setText("Likes");
-            tags.setText("Tags");
-        }else if(item == "Indonesia"){
-            followers.setText("Pengikut");
-            likes.setText("Suka");
-            tags.setText("Menandai");
-        }else if(item == "Chinese"){
-            followers.setText("追随者");
-            likes.setText("喜欢它");
-            tags.setText("马克");
+    private void showChangeLanguageDialog() {
+        final String[] listitem = {"English", "Chinese", "Indonesia", "Javanese"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("Choose Language...");
+        builder.setSingleChoiceItems(listitem, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == 0){
+                    setLocale("en");
+                    recreate();
+                }else if (which == 1){
+                    setLocale("zh");
+                    recreate();
+                }else if (which == 2){
+                    setLocale("in");
+                    recreate();
+                }else if (which == 3){
+                    setLocale("jv");
+                    recreate();
+                }
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void setLocale(String lang) {
+        Resources resources = getResources();
+        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+        Configuration configuration = resources.getConfiguration();
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){
+            configuration.setLocale(new Locale(lang.toLowerCase()));
+        }else{
+            configuration.locale = new Locale(lang.toLowerCase());
         }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
+        resources.updateConfiguration(configuration, displayMetrics);
     }
 }

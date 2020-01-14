@@ -30,11 +30,12 @@
                     android:layout_width="230dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="fill_vertical">
-                    <Spinner
-                        android:id="@+id/spiner"
-                        android:layout_width="140dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="100dp"/>
+                    <Button
+                        android:id="@+id/changeLang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Change Language"
+                        android:layout_marginLeft="70dp"/>
                 </LinearLayout>
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -107,10 +108,9 @@
                 android:src="@drawable/follower"
                 android:layout_margin="10dp"/>
             <TextView
-                android:id="@+id/followers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Followers"
+                android:text="@string/followers"
                 android:layout_gravity="center"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -138,10 +138,9 @@
                 android:src="@drawable/ic_favorite_black_24dp"
                 android:layout_margin="10dp"/>
             <TextView
-                android:id="@+id/likes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Likes"
+                android:text="@string/likes"
                 android:layout_gravity="center"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -169,10 +168,9 @@
                 android:src="@drawable/tag"
                 android:layout_margin="10dp"/>
             <TextView
-                android:id="@+id/tags"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tegs"
+                android:text="@string/tegs"
                 android:layout_gravity="center"
                 android:textSize="16sp"
                 android:textStyle="bold"
